@@ -9,7 +9,7 @@ export class ProductCatalogPage extends BasePage {
 
   async selectFilters(productFilters: ProductFilter[]) {
     for (const productFilter of productFilters) {
-      await this.page.getByTestId("grid").getByText(productFilter.filterType).click();
+      await this.page.getByTestId("grid").getByText(productFilter.filterType).click({ timeout: 5_000 });
 
       for (const filter of productFilter.filterValue) {
         let locator;

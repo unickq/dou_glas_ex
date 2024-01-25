@@ -9,8 +9,13 @@ export class HomePage extends BasePage {
   }
 
   async openParfumFilter(parfumFilter: ParfumFilterType) {
-    await this.page.locator("li").filter({ hasText: "PARFUM" }).hover();
-    await this.page.locator("#tippy-3").getByRole("link", { name: parfumFilter }).click();
+    const parfumLocator = this.page.locator("li").filter({ hasText: "PARFUM" });
+    const menuLocator = this.page.locator("#tippy-3").getByRole("link", { name: parfumFilter });
+    await parfumLocator.hover();
+    if (await parfumLocator.isHidden()) {
+      await parfumLocator.hover();
+    }
+    await menuLocator.click();
 
     await expect(this.page.getByRole("link", { name: "Homepage" })).toBeVisible();
 
