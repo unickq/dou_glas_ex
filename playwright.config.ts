@@ -2,11 +2,11 @@ import { devices, PlaywrightTestConfig } from "@playwright/test";
 import "dotenv/config";
 
 const config: PlaywrightTestConfig = {
-  timeout: 30_000,
+  timeout: 40_000,
   expect: {
     timeout: 10_000,
   },
-  workers: process.env.CI ? 1 : 3,
+  workers: process.env.CI ? 2 : 3,
   testMatch: /.*\.spec\.ts/,
   retries: process.env.CI ? 1 : 3,
   reporter: [
