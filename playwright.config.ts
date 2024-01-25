@@ -10,16 +10,15 @@ const config: PlaywrightTestConfig = {
   testMatch: /.*\.spec\.ts/,
   retries: process.env.CI ? 1 : 3,
   reporter: [
-    [process.env.CI ? "github" : "list"],
+    process.env.CI ? ["github"] : ["html", { open: "never" }],
+    ["line"],
     ["junit", { outputFile: "test-results/playwright.xml" }],
-    ["html", { open: "never" }],
   ],
   use: {
     ...devices[process.env.DEVICE || "Desktop Chrome"],
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "retain-on-failure",
-    navigationTimeout: 30_000,
     baseURL: process.env.BASE_URL || "https://www.douglas.de/de",
   },
   outputDir: "test-results",
