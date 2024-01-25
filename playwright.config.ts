@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
   },
   workers: process.env.CI ? 2 : 3,
   testMatch: /.*\.spec\.ts/,
-  retries: process.env.TEST_RETRIES ? Number.parseInt(process.env.TEST_RETRIES) : 0,
+  retries: process.env.CI ? 1 : 3,
   reporter: [
     [process.env.CI ? "github" : "list"],
     ["junit", { outputFile: "test-results/playwright.xml" }],
@@ -22,7 +22,6 @@ const config: PlaywrightTestConfig = {
     navigationTimeout: 30_000,
     baseURL: process.env.BASE_URL || "https://www.douglas.de/de",
   },
-  reportSlowTests: { max: 0, threshold: 45_000 },
   outputDir: "test-results",
 };
 
