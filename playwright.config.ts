@@ -6,7 +6,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 10_000,
   },
-  workers: process.env.CI ? 2 : 3,
+  workers: process.env.CI ? 1 : 3,
   testMatch: /.*\.spec\.ts/,
   retries: process.env.CI ? 1 : 3,
   reporter: [
