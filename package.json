@@ -1,0 +1,26 @@
+{
+  "name": "douglas",
+  "version": "0.0.1",
+  "author": "unickq",
+  "scripts": {
+    "build": "npx tsc -p . -noEmit && npx eslint --ext .ts .",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test-inspect": "npx cross-env PWDEBUG=1 npx playwright test --reporter=line --timeout=150000 --workers=1",
+    "test-spec": "npx cross-env PWDEBUG=console npx playwright test --workers=1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.41.1",
+    "@types/node": "^20.11.6",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^0.22.1",
+    "prettier": "^3.2.4"
+  }
+}
