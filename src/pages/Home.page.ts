@@ -23,7 +23,6 @@ export class HomePage extends BasePage {
   }
 
   async goto() {
-    // eslint-disable-next-line playwright/no-networkidle
     await this.page.goto("/", { waitUntil: "networkidle" });
   }
 }

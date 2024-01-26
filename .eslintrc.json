@@ -11,6 +11,7 @@
     "playwright/expect-expect": "off",
     "playwright/no-nested-step": "off",
     "playwright/no-wait-for-timeout": "error",
-    "playwright/no-page-pause": "error"
+    "playwright/no-page-pause": "error",
+    "playwright/no-networkidle": "warn"
   }
 }
