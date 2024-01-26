@@ -1,6 +1,5 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../src/fixtures/Base.fixture";
 import { ITest } from "../src/types/type";
-import { HomePage } from "../src/pages/Home.page";
 
 const testData: ITest[] = [
   {
@@ -72,18 +71,16 @@ const testData: ITest[] = [
   },
 ];
 
-test.use({ storageState: ".storage/no_cookie.json" });
-
 test.describe.parallel("Douglas - test example", () => {
-  let homePage: HomePage;
-
-  test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page);
-    await homePage.goto();
-  });
+  test.use({ storageState: ".storage/no_cookie_banner.json" });
 
   testData.forEach((testData, index) => {
-    test(`#${index} - ${testData.name}`, async () => {
+    test(`#${index} - ${testData.name}`, async ({ homePage }) => {
+      test.info().annotations.push({
+        type: "issue",
+        description: `https://github.com/unickq/dou_glas_ex/issues/#{index}`,
+      });
+
       try {
         const productPage = await homePage.openParfumFilter(testData.parfumFilter);
         await productPage.selectFilters(testData.productFilters);
