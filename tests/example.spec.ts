@@ -76,20 +76,33 @@ test.describe.parallel("Douglas - test example", () => {
 
   testData.forEach((testData, index) => {
     test(`#${index} - ${testData.name}`, async ({ homePage }) => {
-      test.info().annotations.push({
-        type: "issue",
-        description: `https://github.com/unickq/dou_glas_ex/issues/#{index}`,
-      });
+      test.info().annotations.push(
+        {
+          type: "issue",
+          description: `https://github.com/unickq/dou_glas_ex/issues/#${index}`,
+        },
+        { type: "author", description: "unickq" },
+      );
 
       try {
-        const productPage = await homePage.openParfumFilter(testData.parfumFilter);
-        await productPage.selectFilters(testData.productFilters);
+        const productPage = await test.step("Open menu filter", async () => {
+          return await homePage.openParfumFilter(testData.parfumFilter);
+        });
+
+        await test.step("Select product filters", async () => {
+          await productPage.selectFilters(testData.productFilters);
+        });
+
         if (testData.resultsCount) {
-          await productPage.shouldHaveResultsCount(testData.resultsCount);
+          await test.step("Validate results", async () => {
+            await productPage.shouldHaveResultsCount(testData.resultsCount!);
+          });
         }
       } catch (error) {
         if (testData.error) {
-          expect(error.message).toContain(testData.error);
+          await test.step("Validate error message", async () => {
+            expect(error.message).toContain(testData.error);
+          });
         }
       }
     });

@@ -20,6 +20,8 @@ jobs:
         run: npm ci
       - name: Install Playwright with dependencies
         run: npx playwright install --with-deps chromium
+      - name: Build & Lint
+        run: npm build
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
